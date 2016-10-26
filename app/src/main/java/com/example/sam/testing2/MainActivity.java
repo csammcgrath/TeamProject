@@ -17,9 +17,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    //This is Andrew
-    //This is Max
-    // I am trying to commit
+    //This is Andrew again
+    //This is Sam
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
