@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "126930171549",
+    "firebase_url": "https://krazysub-aac40.firebaseio.com",
+    "project_id": "krazysub-aac40",
+    "storage_bucket": "krazysub-aac40.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126930171549:android:4303ce79d3c57dee",
+        "android_client_info": {
+          "package_name": "com.example.sam.testing2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126930171549-affjjt0ouobe2kgjmtmmj6pb0r890ds6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0gxFKXrO6Itz6VrKVHnCNm4o5tK0rqKA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
