@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -36,6 +37,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        if(firebaseAuth.getCurrentUser() == null){
+           Toast.makeText(this,"Your credentials were not found", Toast.LENGTH_SHORT).show();
+            finish();
+           startActivity(new Intent(getApplicationContext(), Singin.class));
+       }
     }
 
     @Override
@@ -86,7 +94,6 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(getApplicationContext(), settingActivity.class));
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
