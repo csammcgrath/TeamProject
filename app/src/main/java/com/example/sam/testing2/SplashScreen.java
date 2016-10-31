@@ -8,8 +8,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SplashScreen extends AppCompatActivity {
     ImageView imageView;
+    private FirebaseAuth firebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +31,18 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+               // Thread thread = new Thread(new Runnable() {
+                 //  public void run() {
+                   //    if (firebase.getCurrentUser() == null) {
+                         //  startActivity(new Intent(getApplicationContext(), Singin.class));
+                     //  }
+                   //}
+                //});
+                //thread.start();
                 finish();
+
                 overridePendingTransition(0, 0);
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), Singin.class));
             }
 
             @Override
