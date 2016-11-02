@@ -22,10 +22,10 @@ import static com.example.sam.testing2.R.styleable.View;
 
 public class Singin extends AppCompatActivity implements android.view.View.OnClickListener {
 
-    private Button buttonRegister;
+    private Button signIn;
     private EditText editTextEmail;
     private  EditText editTextPassword;
-    private TextView textViewSignin;
+    private TextView textViewSignUp;
     private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
@@ -36,22 +36,25 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
         setContentView(R.layout.activity_singin);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
         if(firebaseAuth.getCurrentUser() != null){
             finish();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
+
         progressDialog = new ProgressDialog(this);
-        buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        signIn = (Button) findViewById(R.id.buttonRegister);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 
-        textViewSignin = (TextView) findViewById(R.id.textViewSignIn);
+        textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
 
-        buttonRegister.setOnClickListener(this);
-        textViewSignin.setOnClickListener(this);
+        signIn.setOnClickListener(this);
+        textViewSignUp.setOnClickListener(this);
     }
 
     private void registerUser(){
+
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
@@ -64,7 +67,7 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
         }
 
         if(TextUtils.isEmpty(password)){
-            // password id empty
+            // password is empty
             Toast.makeText(this,"Please enter password", Toast.LENGTH_SHORT).show();
             // Stopping the function execution further
             return;
@@ -74,6 +77,7 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
         // we wil register
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
+
 
         firebaseAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -85,9 +89,9 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
                             // we will start the profile activity
                             // here
                            finish();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), profileActivity.class));
                         }else{
-                            Toast.makeText(Singin.this,"Could not register", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Singin.this,"Invalid username or password", Toast.LENGTH_SHORT).show();
                         }
                         progressDialog.dismiss();
                     }
@@ -95,13 +99,12 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
     }
     @Override
     public void onClick(View view){
-        if(view == buttonRegister) {
-            registerUser();
+        if(view == signIn) {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
-         if(view == textViewSignin){
-             // will open login activity here
-             startActivity(new Intent(this, MainActivity.class));
-         }
+        if(view == textViewSignUp) {
+            registerUser();
+        }
     }
 }

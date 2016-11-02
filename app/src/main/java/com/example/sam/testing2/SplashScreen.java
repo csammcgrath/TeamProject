@@ -31,14 +31,6 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-               // Thread thread = new Thread(new Runnable() {
-                 //  public void run() {
-                   //    if (firebase.getCurrentUser() == null) {
-                         //  startActivity(new Intent(getApplicationContext(), Singin.class));
-                     //  }
-                   //}
-                //});
-                //thread.start();
                 finish();
 
                 overridePendingTransition(0, 0);

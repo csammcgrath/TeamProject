@@ -20,8 +20,11 @@ public class settingActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
+
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
         buttonLogOut = (Button) findViewById(R.id.logOut);
         textView = (TextView) findViewById(R.id.textView2);
 
