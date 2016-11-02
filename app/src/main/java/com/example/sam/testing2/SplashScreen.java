@@ -43,4 +43,8 @@ public class SplashScreen extends AppCompatActivity {
             }
         });
     }
+
+    public int getAnimationTime() {
+        return 3000;
+    }
 }
