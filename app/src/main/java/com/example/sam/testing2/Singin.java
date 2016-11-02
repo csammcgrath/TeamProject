@@ -35,13 +35,6 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singin);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        if(firebaseAuth.getCurrentUser() != null){
-            finish();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        }
-
         progressDialog = new ProgressDialog(this);
         signIn = (Button) findViewById(R.id.buttonRegister);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
@@ -52,6 +45,19 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
         signIn.setOnClickListener(this);
         textViewSignUp.setOnClickListener(this);
     }
+
+    private void isLoggedIn(){
+        firebaseAuth = FirebaseAuth.getInstance();
+
+          if(firebaseAuth.getCurrentUser() != null){
+            finish();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+          }
+          else{
+            Toast.makeText(this,"Your credentials were not found", Toast.LENGTH_SHORT).show();
+          }
+    }
+
 
     private void registerUser(){
 
@@ -97,10 +103,11 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
                     }
                 });
     }
+
     @Override
     public void onClick(View view){
         if(view == signIn) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            isLoggedIn();
         }
 
         if(view == textViewSignUp) {

@@ -38,13 +38,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        if(firebaseAuth.getCurrentUser() == null){
-           Toast.makeText(this,"Your credentials were not found", Toast.LENGTH_SHORT).show();
-            finish();
-           startActivity(new Intent(getApplicationContext(), Singin.class));
-       }
     }
 
     @Override
