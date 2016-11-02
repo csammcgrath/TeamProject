@@ -1,5 +1,7 @@
 package com.example.sam.testing2;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,9 +11,12 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class PointUnitTest {
     @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+    public void addPointsCorrectly() throws Exception {
+        UserInfo user = new UserInfo("yes", "yes", "yes", "yes", 0);
+        user.addPoints(5);
+        Assert.assertEquals(5, user.getPoint());
+        Assert.assertTrue(user.getPoint() >= 0);
     }
 }
