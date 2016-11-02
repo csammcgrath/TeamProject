@@ -1,9 +1,5 @@
 package com.example.sam.testing2;
 
-import com.google.firebase.auth.UserInfo;
-
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,14 +9,50 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-
-//userinfo is not implemented yet
-/*public class PointUnitTest {
+public class ExampleUnitTest {
     @Test
-    public void addPointsCorrectly() throws Exception {
-        UserInfo user = new UserInfo("yes", "yes", "yes", "yes", 0);
-        user.addPoints(5);
-        Assert.assertEquals(5, user.getPoint());
-        Assert.assertTrue(user.getPoint() >= 0);
+    public void addition_isCorrect() throws Exception {
+        assertEquals(4, 2 + 2);
     }
-}*/
+}
+
+class checkPassword {
+    public void isInteger(String password) throws Exception {
+        assertEquals(password, Integer.parseInt(password));
+    }
+}
+
+class checkZip {
+    public void isInteger(String zip) throws Exception {
+        assertEquals(zip, Integer.parseInt(zip));
+    }
+}
+
+class pointValidator {
+    @Test
+    public Boolean pointNegative(int point) {
+        if (point < 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Test
+    public Boolean isPointInteger(int point) {
+        if (point == Math.floor(point)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Test
+    public Boolean isPointResetProperly(int point) {
+        if (point == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}

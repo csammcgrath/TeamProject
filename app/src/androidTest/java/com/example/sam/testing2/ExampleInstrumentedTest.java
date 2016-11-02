@@ -25,38 +25,3 @@ public class ExampleInstrumentedTest {
     }
 }
 
-class SplashScreenTest {
-    @Test
-    public void splashScreenLoadingTime() throws Exception {
-        //assertEquals(SplashScreen.getAnimationTime(), 3000);
-    }
-}
-
-/*class pointValidator {
-    @Test
-    public Boolean pointNegative(int point) {
-        if (point < 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    @Test
-    public Boolean isPointInteger(int point) {
-        if (point == Math.floor(point)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Test
-    public Boolean isPointResetProperly(int point) {
-        if (point == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-}*/
