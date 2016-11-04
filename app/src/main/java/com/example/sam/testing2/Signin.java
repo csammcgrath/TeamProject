@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,9 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import static com.example.sam.testing2.R.styleable.View;
-
-public class Singin extends AppCompatActivity implements android.view.View.OnClickListener {
+public class SignIn extends AppCompatActivity implements android.view.View.OnClickListener {
 
     private Button signIn;
     private EditText editTextEmail;
@@ -34,6 +31,13 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singin);
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        // If a user logged in go string to the Application
+        if(firebaseAuth.getCurrentUser() != null){
+            finish();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
 
         progressDialog = new ProgressDialog(this);
         signIn = (Button) findViewById(R.id.buttonRegister);
@@ -46,35 +50,65 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
         textViewSignUp.setOnClickListener(this);
     }
 
+    // Does an account exist?
     private void isLoggedIn(){
-        firebaseAuth = FirebaseAuth.getInstance();
 
-          if(firebaseAuth.getCurrentUser() != null){
-            finish();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-          }
-          else{
-            Toast.makeText(this,"Your credentials were not found", Toast.LENGTH_SHORT).show();
-          }
+        // Get email and user form from User
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+
+        // Validate should not be empty
+        if(TextUtils.isEmpty(email)){
+            // email is empty
+            Toast.makeText(SignIn.this,"Please enter email", Toast.LENGTH_SHORT).show();
+
+            // Stopping the function execution further
+            return;
+        }
+        if(TextUtils.isEmpty(password)){
+            // password is empty
+            Toast.makeText(SignIn.this,"Please enter password", Toast.LENGTH_SHORT).show();
+            // Stopping the function execution further
+            return;
+        }
+
+        // While waiting enjoy the massage
+        progressDialog.setMessage("Signing in...");
+        progressDialog.show();
+
+        firebaseAuth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task){
+                        progressDialog.dismiss();
+                        if(task.isSuccessful()){
+                            // user is successfully registered
+                            // we will start the main activity
+                            finish();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        }else{
+                            Toast.makeText(SignIn.this,"Your credentials could not be verified", Toast.LENGTH_SHORT).show();
+                        }
+                        progressDialog.dismiss();
+                    }
+                });
     }
 
-
+    // Register A new user
     private void registerUser(){
-
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
             // email is empty
-            Toast.makeText(this,"Please enter email", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(SignIn.this,"Please enter email", Toast.LENGTH_SHORT).show();
             // Stopping the function execution further
             return;
         }
 
         if(TextUtils.isEmpty(password)){
             // password is empty
-            Toast.makeText(this,"Please enter password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignIn.this,"Please enter password", Toast.LENGTH_SHORT).show();
             // Stopping the function execution further
             return;
         }
@@ -83,8 +117,6 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
         // we wil register
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
-
-
         firebaseAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -97,7 +129,7 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
                            finish();
                             startActivity(new Intent(getApplicationContext(), profileActivity.class));
                         }else{
-                            Toast.makeText(Singin.this,"Invalid username or password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignIn.this,"Invalid username or password", Toast.LENGTH_SHORT).show();
                         }
                         progressDialog.dismiss();
                     }
@@ -107,10 +139,12 @@ public class Singin extends AppCompatActivity implements android.view.View.OnCli
     @Override
     public void onClick(View view){
         if(view == signIn) {
+            // Check if account exists
             isLoggedIn();
         }
 
         if(view == textViewSignUp) {
+            // Register a new user
             registerUser();
         }
     }

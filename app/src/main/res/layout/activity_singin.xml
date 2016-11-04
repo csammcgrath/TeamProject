@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.sam.testing2.Singin">
+    android:background="@drawable/login"
+    tools:context="com.example.sam.testing2.SignIn">
 
     <LinearLayout
         android:layout_centerHorizontal="true"
@@ -23,11 +24,12 @@
             android:id="@+id/buttonRegister"
             android:text="Sign In"
             android:layout_width="match_parent"
+            android:background="#E0E0E0"
             android:layout_height="wrap_content" />
 
         <TextView
             android:textAlignment="center"
-            android:text="Has not Registred? Sign up here"
+            android:text="Not Registered? Sign up here"
             android:id="@+id/textViewSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -43,22 +45,25 @@
         android:layout_centerHorizontal="true" />
 
     <EditText
-        android:inputType="textPassword"
-        android:hint="Enter your password"
-        android:id="@+id/editTextPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
         android:inputType="textEmailAddress"
     android:hint="Enter your email"
     android:id="@+id/editTextEmail"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextPassword"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/textView3"
+        android:background="#E0E0E0"
         android:layout_alignParentStart="true" />
+
+    <EditText
+        android:inputType="textPassword"
+        android:hint="Enter your password"
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E0E0E0"
+        android:layout_below="@+id/editTextEmail"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="19dp" />
 
 </RelativeLayout>

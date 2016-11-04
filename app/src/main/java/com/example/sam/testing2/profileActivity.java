@@ -14,9 +14,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static com.example.sam.testing2.R.id.editTextEmail;
+import static com.example.sam.testing2.R.id.editTextPassword;
+
 public class profileActivity extends AppCompatActivity implements android.view.View.OnClickListener{
 
-    // firebase auth object
+    // FireBase auth object
     private FirebaseAuth firebaseAuth;
 
     //view objects
@@ -27,23 +30,25 @@ public class profileActivity extends AppCompatActivity implements android.view.V
     private EditText editTextAddress;
     private EditText editTextCite;
     private EditText editTextNameSate;
-
-
     private DatabaseReference databaseReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // initialize firebase object
+        // initialize FireBase object
         firebaseAuth = FirebaseAuth.getInstance();
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
         editTextCite = (EditText) findViewById(R.id.editTextCity);
         editTextNameSate = (EditText) findViewById(R.id.editTextState);
         textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
+
+
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         textViewUserEmail.setText("Welcome " + user.getEmail());
@@ -58,13 +63,14 @@ public class profileActivity extends AppCompatActivity implements android.view.V
     }
 
     private void saveUserInfo(){
+
         String name = editTextName.getText().toString().trim();
         String address = editTextAddress.getText().toString().trim();
         String city = editTextCite.getText().toString().trim();
         String state = editTextNameSate.getText().toString().trim();
         int point = 0;
 
-        UserInfo userInfo = new UserInfo(name, address,city, state);
+        UserInfo userInfo = new UserInfo( name, address,city, state);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
@@ -86,6 +92,5 @@ public class profileActivity extends AppCompatActivity implements android.view.V
         if(view == buttonSave){
             saveUserInfo();
         }
-
     }
 }
