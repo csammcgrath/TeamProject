@@ -1,7 +1,6 @@
 package com.example.sam.testing2;
 
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.animation.Animation;
@@ -34,7 +33,7 @@ public class SplashScreen extends AppCompatActivity {
                 finish();
 
                 overridePendingTransition(0, 0);
-                startActivity(new Intent(getApplicationContext(), Singin.class));
+                startActivity(new Intent(getApplicationContext(), SignIn.class));
             }
 
             @Override

@@ -14,21 +14,36 @@ public class settingActivity extends AppCompatActivity implements View.OnClickLi
 
     private FirebaseAuth firebaseAuth;
     private Button buttonLogOut;
-    private TextView textView;
+    private TextView email;
+    private TextView name;
+
+    private TextView address;
+    private TextView state;
+    private TextView point;
+    private UserInfo userInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-
+        userInfo = new UserInfo();
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
 
         buttonLogOut = (Button) findViewById(R.id.logOut);
-        textView = (TextView) findViewById(R.id.textView2);
+        email = (TextView) findViewById(R.id.textView2);
+        name = (TextView) findViewById(R.id.textView3);
+        address = (TextView) findViewById(R.id.textView5);
+        state = (TextView) findViewById(R.id.textView6);
+        point = (TextView) findViewById(R.id.textView7);
 
-        textView.setText("Welcome " + user.getEmail());
+        email.setText("Welcome " + user.getEmail() + " " + "Account Summary:");
+        name.setText("Full name: " + userInfo.getName());
+        address.setText("Address: " + userInfo.getAddress());
+        state.setText("City and State: " + userInfo.getCity() + " " + userInfo.getState());
+        point.setText("Awarded points: " + userInfo.getPoint());
+
         buttonLogOut.setOnClickListener(this);
     }
 
@@ -38,7 +53,7 @@ public class settingActivity extends AppCompatActivity implements View.OnClickLi
 
             firebaseAuth.signOut();
             finish();
-            startActivity(new Intent(this, Singin.class));
+            startActivity(new Intent(this, SignIn.class));
         }
     }
 }

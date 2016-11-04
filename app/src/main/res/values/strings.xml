@@ -19,4 +19,11 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="enter_your_full_name">Enter your full name</string>
+    <string name="enter_your_address">Enter your address</string>
+    <string name="enter_your_city">Enter your city</string>
+    <string name="enter_your_state">Enter your state</string>
+    <string name="large_text">LARGE TEXT</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="save_information">Save Information</string>
 </resources>
