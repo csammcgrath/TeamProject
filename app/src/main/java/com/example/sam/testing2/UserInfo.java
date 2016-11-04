@@ -4,7 +4,7 @@ package com.example.sam.testing2;
  * Created by Max&Lena on 11/2/2016.
  */
 
-// Class User
+// Class User Info
 public class UserInfo {
 
     public String name;
