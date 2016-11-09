@@ -34,7 +34,9 @@
         </activity>
         <activity android:name=".SignIn" />
         <activity android:name=".settingActivity" />
-        <activity android:name=".profileActivity"/>
+        <activity android:name=".profileActivity" />
+        <activity android:name=".menuClass" />
+        <activity android:name=".locationsClass"></activity>
     </application>
 
 </manifest>
