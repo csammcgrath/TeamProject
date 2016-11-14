@@ -6,6 +6,12 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_contact"
+            testing2:showAsAction="ifRoom"
+            android:title="Home"
+            tools:ignore="AppCompatResource"/>
+        <item
             android:id="@+id/nav_menu"
             testing2:showAsAction="always"
             android:icon="@drawable/ic_menu"
@@ -21,12 +27,6 @@
             android:icon="@drawable/ic_rewards"
             testing2:showAsAction="ifRoom"
             android:title="Rewards"
-            tools:ignore="AppCompatResource"/>
-        <item
-            android:id="@+id/nav_contactUs"
-            android:icon="@drawable/ic_contact"
-            testing2:showAsAction="ifRoom"
-            android:title="Contact Us"
             tools:ignore="AppCompatResource"/>
         <item
             android:id="@+id/nav_settings"

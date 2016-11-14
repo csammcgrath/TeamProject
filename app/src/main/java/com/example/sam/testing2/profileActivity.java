@@ -62,6 +62,7 @@ public class profileActivity extends AppCompatActivity implements android.view.V
 
     }
 
+    // Save User
     private void saveUserInfo(){
 
         String name = editTextName.getText().toString().trim();
