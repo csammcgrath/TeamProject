@@ -4,16 +4,8 @@
     android:id="@+id/activity_setting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login"
+    android:background="#ffffff"
     tools:context="com.example.sam.testing2.settingActivity">
-
-    <Button
-        android:text="Log Out"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerVertical="true"
-    android:layout_centerHorizontal="true"
-    android:id="@+id/logOut" />
 
 
     <TextView
@@ -64,5 +56,14 @@
         android:layout_marginTop="160dp"
         android:id="@+id/textView7"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="Log Out"
+        android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        android:id="@+id/logOut"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="logOutOnClick" />
 
 </RelativeLayout>

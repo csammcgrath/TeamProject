@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new locationsClass();
                 break;
             case R.id.nav_settings:
-                fragment = new settingsActivity();
+                fragment = new settingActivity();
         }
         //replacing the fragment
         if (fragment != null) {

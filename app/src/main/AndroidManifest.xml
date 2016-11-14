@@ -14,29 +14,38 @@
         android:icon="@drawable/iconlogot"
         android:label="Steve&apos;s Krazy Sub"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:screenOrientation="portrait">
         <activity
             android:name=".MainActivity"
             android:label="Krazy Sub"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashScreen">
+        <activity android:name=".SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignIn" />
-        <activity android:name=".settingActivity" />
-        <activity android:name=".profileActivity" />
-        <activity android:name=".menuClass" />
-        <activity android:name=".locationsClass"></activity>
+        <activity android:name=".SignIn"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".settingActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".profileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".menuClass"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".locationsClass"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
