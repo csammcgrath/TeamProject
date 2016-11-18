@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        Firebase.setAndroidContext(this);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -74,30 +76,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    /*@SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_menu) {
-
-        } else if (id == R.id.nav_locations) {
-
-        } else if (id == R.id.nav_rewards) {
-
-        } else if (id == R.id.nav_contactUs) {
-
-        } else if (id == R.id.nav_settings) {
-            startActivity(new Intent(getApplicationContext(), settingActivity.class));
-        }
-
-        // draw stuff
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }*/
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -115,7 +93,6 @@ public class MainActivity extends AppCompatActivity
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_rewards:
-                fragment = new Menu1();
                 break;
             case R.id.nav_menu:
                 fragment = new menuClass1();
@@ -125,6 +102,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_settings:
                 fragment = new settingActivity();
+                break;
         }
         //replacing the fragment
         if (fragment != null) {

@@ -9,61 +9,71 @@
 
 
     <TextView
-    android:text="TextView"
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentStart="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:id="@+id/textView7"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentStart="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:id="@+id/textView3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+    android:text="@string/textview"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_alignStart="@+id/logOut"
-    android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:layout_marginTop="24dp"
     android:id="@+id/textView2"
-    android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/logOut"
-        android:layout_marginTop="40dp"
-        android:id="@+id/textView3"
-        android:layout_alignParentEnd="true" />
-
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/logOut"
-        android:layout_marginTop="100dp"
-        android:id="@+id/textView5"
-        android:layout_alignParentEnd="true" />
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/logOut"
-        android:layout_marginTop="130dp"
-        android:id="@+id/textView6"
-        android:layout_alignParentEnd="true" />
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/logOut"
-        android:layout_marginTop="160dp"
-        android:id="@+id/textView7"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignEnd="@+id/logOut" />
 
     <Button
-        android:text="Log Out"
+        android:text="@string/log_out"
         android:layout_width="wrap_content"
     android:layout_height="wrap_content"
         android:id="@+id/logOut"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="logOutOnClick" />
+        android:onClick="logOutOnClick"
+        android:layout_marginTop="66dp"
+        android:layout_below="@+id/textView7"
+        android:layout_toEndOf="@+id/textView7"
+        android:layout_marginStart="69dp" />
 
 </RelativeLayout>

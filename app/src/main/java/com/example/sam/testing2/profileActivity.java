@@ -31,6 +31,7 @@ public class profileActivity extends AppCompatActivity implements android.view.V
     private EditText editTextCite;
     private EditText editTextNameSate;
     private DatabaseReference databaseReference;
+    private  UserInfo userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +70,8 @@ public class profileActivity extends AppCompatActivity implements android.view.V
         String address = editTextAddress.getText().toString().trim();
         String city = editTextCite.getText().toString().trim();
         String state = editTextNameSate.getText().toString().trim();
-        int point = 0;
 
-        UserInfo userInfo = new UserInfo( name, address,city, state);
+        userInfo = new UserInfo( name, address,city, state);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 

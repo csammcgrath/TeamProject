@@ -7,11 +7,11 @@ package com.example.sam.testing2;
 // Class User Info
 public class UserInfo {
 
-    public String name;
-    public String address;
-    public String city;
-    public String state;
-    public int point;
+    private String name;
+    private String address;
+    private String city;
+    private String state;
+    private int point;
 
     public UserInfo(){
         this.address = "";
@@ -19,9 +19,17 @@ public class UserInfo {
         this.city = "";
         this.state = "";
         this.point = 0;
-
     }
 
+    public  UserInfo(int point)
+    {
+        this.point = point;
+        getName();
+        getAddress();
+        getState();
+        getCity();
+
+    }
     public UserInfo( String name, String address,String city, String state){
         this.address = address;
         this.name = name;
@@ -30,10 +38,10 @@ public class UserInfo {
         this.point = 0;
     }
 
-    public String getName() {
+    public String getName()  {
         return name;
     }
-    public String getAddress(){
+    public String getAddress() {
         return address;
     }
     public String getCity(){
@@ -45,4 +53,21 @@ public class UserInfo {
     public int getPoint(){
         return point;
     }
+
+    public void setName(String name){
+        this.name = name;
+    }
+    public void setAddress(String address){
+        this.address = address;
+    }
+    public void setCity(String city){
+        this.city = name;
+    }
+    public void setState(String state){
+        this.state = state;
+    }
+    public void setPoint(int point){
+        this.point = point;
+    }
 }
+
