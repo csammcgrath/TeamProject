@@ -26,4 +26,6 @@
     <string name="large_text">LARGE TEXT</string>
     <string name="main_menu">Main Menu</string>
     <string name="save_information">Save Information</string>
+    <string name="textview">TextView</string>
+    <string name="log_out">Log Out</string>
 </resources>
