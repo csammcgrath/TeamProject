@@ -59,7 +59,7 @@
 
     <Button
         android:text="Log Out"
-        android:layout_width="wrap_content"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
         android:id="@+id/logOut"
         android:layout_centerVertical="true"

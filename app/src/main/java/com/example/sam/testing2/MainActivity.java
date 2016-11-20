@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_rewards:
-                fragment = new Menu1();
                 break;
             case R.id.nav_menu:
                 fragment = new menuClass1();
@@ -125,6 +124,10 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_settings:
                 fragment = new settingActivity();
+                break;
+            case R.id.nav_home:
+                //fragment = new MainActivity();
+                break;
         }
         //replacing the fragment
         if (fragment != null) {
