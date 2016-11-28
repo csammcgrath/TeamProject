@@ -9,6 +9,11 @@
     tools:openDrawer="start"
     android:background="#ffffff">
 
+
+    <include android:id="@+id/my_id1"
+            layout="@layout/nav_header_main"/>
+
+
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
