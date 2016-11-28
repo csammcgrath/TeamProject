@@ -2,6 +2,7 @@ package com.example.sam.testing2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -40,6 +41,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        onNavigationItemSelected(navigationView.getMenu().getItem(0));
+        Fragment fragment = new homeScreen();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, fragment);
+        ft.commit();
     }
 
     @Override
@@ -126,7 +133,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new settingActivity();
                 break;
             case R.id.nav_home:
-                //fragment = new MainActivity();
+                fragment = new homeScreen();
                 break;
         }
         //replacing the fragment

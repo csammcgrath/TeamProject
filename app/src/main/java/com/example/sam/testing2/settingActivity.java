@@ -45,7 +45,6 @@ public class settingActivity extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //returning our layout file
-        //change R.layout.yourlayoutfilename for each of your fragments
         return inflater.inflate(R.layout.activity_setting, container, false);
     }
 
@@ -53,7 +52,7 @@ public class settingActivity extends Fragment  {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        Firebase.setAndroidContext(getActivity());
         userInfo = new UserInfo();
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
