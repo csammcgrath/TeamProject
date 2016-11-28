@@ -1,12 +1,15 @@
 package com.example.sam.testing2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.internal.NavigationMenu;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,19 +19,41 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+
+import static com.example.sam.testing2.R.layout.activity_main;
+import static com.example.sam.testing2.R.layout.nav_header_main;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     // Hey you
     private FirebaseAuth firebaseAuth;
+    private UserInfo userInfo;
+    private DatabaseReference databaseReference;
+    private TextView email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+      
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View vi = inflater.inflate(R.layout.nav_header_main, null); //log.xml is your file.
+        TextView tv = (TextView)vi.findViewById(R.id.textView);
+        tv.setText("BOO");
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
+        setContentView(activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -40,6 +65,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        onNavigationItemSelected(navigationView.getMenu().getItem(0));
+        Fragment fragment = new homeScreen();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, fragment);
+        ft.commit();
     }
 
     @Override
@@ -126,7 +157,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new settingActivity();
                 break;
             case R.id.nav_home:
-                //fragment = new MainActivity();
+                fragment = new homeScreen();
                 break;
         }
         //replacing the fragment
