@@ -33,7 +33,6 @@ import static com.example.sam.testing2.R.layout.nav_header_main;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    // Hey you
     private FirebaseAuth firebaseAuth;
     private UserInfo userInfo;
     private DatabaseReference databaseReference;
@@ -42,40 +41,52 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-      
+        //inflaters are instantiated indirectly.
+        //Return the handle to a system-level service by class.
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        //Inflate a new view hierarchy from the specified xml node.
         View vi = inflater.inflate(R.layout.nav_header_main, null); //log.xml is your file.
         TextView tv = (TextView)vi.findViewById(R.id.textView);
         tv.setText("BOO");
 
+        //authenticate firebase database, and get the current user by unique id.
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-
+        //Set the activity content from a layout resource.
+        //The resource will be inflated, adding all top-level views to the activity.
         setContentView(activity_main);
 
+        //A toolbar is a dropdown menu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        //A drawer is the thing that slides out from the left side when the triple-line icon is pushed.
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
+        //Synchronize the state of the drawer indicator/affordance with the linked DrawerLayout.
         toggle.syncState();
 
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //Listener for handling events on navigation items.
         navigationView.setNavigationItemSelectedListener(this);
 
-        onNavigationItemSelected(navigationView.getMenu().getItem(0));
+        //Called when an item in the navigation menu is selected.
+        onNavigationItemSelected(navigationView.getMenu().getItem(0).setChecked(true));
         Fragment fragment = new homeScreen();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, fragment);
         ft.commit();
     }
 
+    //opens or closes the drawer when necessary after a user pushes the back button
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //checks if the current drawer is open
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -105,34 +116,10 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    /*@SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_menu) {
-
-        } else if (id == R.id.nav_locations) {
-
-        } else if (id == R.id.nav_rewards) {
-
-        } else if (id == R.id.nav_contactUs) {
-
-        } else if (id == R.id.nav_settings) {
-            startActivity(new Intent(getApplicationContext(), settingActivity.class));
-        }
-
-        // draw stuff
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }*/
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
+        //opens the correct screen on a tap from the user.
         displaySelectedScreen(item.getItemId());
 
         return true;
@@ -160,13 +147,14 @@ public class MainActivity extends AppCompatActivity
                 fragment = new homeScreen();
                 break;
         }
-        //replacing the fragment
+        //replacing the fragment if we were already in one
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();
         }
 
+        //we need to close the drawer after the user opens a fragment.
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }

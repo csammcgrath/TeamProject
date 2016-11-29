@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SignIn extends AppCompatActivity implements android.view.View.OnClickListener {
+class SignIn extends AppCompatActivity implements android.view.View.OnClickListener {
 
     private Button signIn;
     private EditText editTextEmail;
