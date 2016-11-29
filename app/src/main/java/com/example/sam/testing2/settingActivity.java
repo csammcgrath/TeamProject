@@ -52,17 +52,22 @@ public class settingActivity extends Fragment  {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //sets context to the current fragment
         Firebase.setAndroidContext(getActivity());
+        //create new instance of userInfo class
         userInfo = new UserInfo();
 
+        //this points to the database's URL
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        FirebaseUser user = firebaseAuth.getCurrentUser(); //current user's ID
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //the UID of the current user
         DatabaseReference ref = database.getReference(user.getUid());
 
+        //prompt user for information
         buttonLogOut = (Button) getView().findViewById(R.id.logOut);
         email = (TextView) getView().findViewById(R.id.textView2);
         name = (TextView) getView().findViewById(R.id.textView3);
@@ -70,24 +75,29 @@ public class settingActivity extends Fragment  {
         state = (TextView) getView().findViewById(R.id.textView6);
         point = (TextView) getView().findViewById(R.id.textView7);
 
+        //we will use this to construct a new user.
         email.setText("Welcome " + user.getEmail() + " " + "Account Summary:");
         name.setText("Full name: " + userInfo.getName());
         address.setText("Address: " + userInfo.getAddress());
         state.setText("City and State: " + userInfo.getCity() + " " + userInfo.getState());
         point.setText("Awarded points: " + userInfo.getPoint());
 
-
+        //each uid has children that make up user info such as email, or numPoints
         DatabaseReference upvotesRef = ref.child("point");
+        //instantiate a new transaction
+        //transactions are used to change user information
         upvotesRef.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
+                //This is used to increment user points after a transaction
                 Integer currentValue = mutableData.getValue(Integer.class);
                 if (currentValue == null) {
                     mutableData.setValue(1);
                 } else {
+                    //increment value by 8
                     mutableData.setValue(currentValue + 8);
                 }
-
+                //assume transaction worked, and return new value
                 return Transaction.success(mutableData);
             }
 
