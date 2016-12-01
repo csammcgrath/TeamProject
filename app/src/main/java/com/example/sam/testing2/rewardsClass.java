@@ -1,6 +1,6 @@
 package com.example.sam.testing2;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -17,6 +17,7 @@ public class rewardsClass extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //returning our layout file
         return inflater.inflate(R.layout.activity_rewards, container, false);
+
     }
 
 

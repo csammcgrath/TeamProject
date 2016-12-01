@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_rewards:
+                fragment = new rewardsClass();
                 break;
             case R.id.nav_menu:
                 fragment = new menuClass1();
