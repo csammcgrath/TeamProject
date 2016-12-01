@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         //Inflate a new view hierarchy from the specified xml node.
-        View vi = inflater.inflate(R.layout.nav_header_main, null); //log.xml is your file.
-        TextView tv = (TextView)vi.findViewById(R.id.textView);
-        tv.setText("BOO");
+        //View vi = inflater.inflate(R.layout.nav_header_main, null); //log.xml is your file.
+        //TextView tv = (TextView)vi.findViewById(R.id.textView);
+        //tv.setText("BOO");
 
         //authenticate firebase database, and get the current user by unique id.
         firebaseAuth = FirebaseAuth.getInstance();

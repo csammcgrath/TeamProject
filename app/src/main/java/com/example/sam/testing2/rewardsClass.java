@@ -12,6 +12,17 @@ import android.view.ViewGroup;
  */
 
 public class rewardsClass extends Fragment {
+
+    private int progress = 0;
+
+    private synchronized int getProgressBar() {
+        return this.progress;
+    }
+
+    private synchronized void setProgressBar() {
+        this.progress = Math.min(100, progress);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -25,5 +36,8 @@ public class rewardsClass extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
     }
+
+
 }
