@@ -33,18 +33,6 @@ public class homeScreen extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView textBox = (TextView)getView().findViewById(R.id.tokenTextBox);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("KrazySub");
-
-        String token = getTokenFromPrefs();
-
-        textBox.setText(token);
-    }
-
-    private String getTokenFromPrefs()
-    {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        return preferences.getString("notification", null);
     }
 }

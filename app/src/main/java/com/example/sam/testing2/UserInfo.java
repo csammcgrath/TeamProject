@@ -21,7 +21,7 @@ public class UserInfo {
         this.point = 0;
     }
 
-    public  UserInfo(int point)
+    public UserInfo(int point)
     {
         this.point = point;
         getName();
