@@ -61,7 +61,7 @@ public class UserInfo {
         this.address = address;
     }
     public void setCity(String city){
-        this.city = name;
+        this.city = city;
     }
     public void setState(String state){
         this.state = state;

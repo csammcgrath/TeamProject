@@ -10,12 +10,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 
 /**
  * Created by Sam on 11/30/2016.
@@ -24,7 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class rewardsClass extends Fragment {
 
     private Handler mHandler = new Handler();
-    private int points = 0;
     private int leftOverPoints = 50;
     private TextView messageText;
     private TextView instructText;
@@ -35,6 +41,7 @@ public class rewardsClass extends Fragment {
     private DatabaseReference databaseReference;
     private Firebase firebase;
     private int progress = 0;
+    private  int userPoints;
 
     private synchronized int getProgressBar() {
         return this.progress;
@@ -59,6 +66,7 @@ public class rewardsClass extends Fragment {
 
         //sets context to the current fragment
         Firebase.setAndroidContext(getActivity());
+
         //create new instance of userInfo class
         userInfo = new UserInfo();
 
@@ -72,35 +80,83 @@ public class rewardsClass extends Fragment {
         //the UID of the current user
         DatabaseReference ref = database.getReference(user.getUid());
 
-        messageText = (TextView)getView().findViewById(R.id.textView11);
-        claimButton = (Button)getView().findViewById(R.id.button2);
-        instructText = (TextView)getView().findViewById(R.id.textView10);
-        progressBar = (ProgressBar)getView().findViewById(R.id.progressBar2);
+        messageText = (TextView) getView().findViewById(R.id.textView11);
+        claimButton = (Button) getView().findViewById(R.id.button2);
+        instructText = (TextView) getView().findViewById(R.id.textView10);
+        progressBar = (ProgressBar) getView().findViewById(R.id.progressBar2);
 
-        //points = userInfo.getPoint();
-        points = 50;
-        leftOverPoints = 50 - points;
 
-        setProgressBar(points);
+        // Point Calculation
 
-        mHandler.post(new Runnable() {
-            public void run() {
-                progressBar.setProgress(getProgressBar() * 2);
+        //each uid has children that make up user info such as email, or numPoints
+        DatabaseReference upvotesRef = ref.child("point");
+        //instantiate a new transaction
+        //transactions are used to change user information
+        upvotesRef.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                //This is used to increment user points after a transaction
+                Integer currentValue = mutableData.getValue(Integer.class);
+                if (currentValue == null) {
+                    mutableData.setValue(1);
+                } else {
+                    //increment value by 8
+                    mutableData.setValue(currentValue + 2);
+                }
+                //assume transaction worked, and return new value
+                return Transaction.success(mutableData);
             }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b, com.google.firebase.database.DataSnapshot dataSnapshot) {
+                display();
+            }
+
         });
 
-        messageText.setText("You have " + points + " points! You are " + leftOverPoints + " away from the FREE sub!");
 
-        if (points >= 50) {
-            messageText.setVisibility(View.INVISIBLE);
-            instructText.setVisibility(View.VISIBLE);
-            claimButton.setVisibility(View.VISIBLE);
-        } else {
-            messageText.setVisibility(View.VISIBLE);
-            instructText.setVisibility(View.INVISIBLE);
-            claimButton.setVisibility(View.INVISIBLE);
-        }
+        firebase = new Firebase("https://krazysub-aac40.firebaseio.com/");
+        firebase.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    userInfo = new UserInfo();
+                    userPoints = data.getValue(UserInfo.class).getPoint();
+
+
+                    leftOverPoints = 50 - userPoints;
+
+                    setProgressBar(userPoints);
+
+                    mHandler.post(new Runnable() {
+                        public void run() {
+                            progressBar.setProgress(getProgressBar() * 2);
+                        }
+                    });
+
+                    messageText.setText("You have " + userPoints + " points! You are " + leftOverPoints + " away from the FREE sub!");
+
+                    if (userPoints >= 50) {
+                        messageText.setVisibility(View.INVISIBLE);
+                        instructText.setVisibility(View.VISIBLE);
+                        claimButton.setVisibility(View.VISIBLE);
+                    } else {
+                        messageText.setVisibility(View.VISIBLE);
+                        instructText.setVisibility(View.INVISIBLE);
+                        claimButton.setVisibility(View.INVISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
-
-
+    // Points were added
+    public void display(){
+        Toast.makeText(rewardsClass.this.getActivity(),"New Reward Points were added...", Toast.LENGTH_SHORT).show();
+    }
 }

@@ -76,12 +76,9 @@ public class settingActivity extends Fragment  {
         point = (TextView) getView().findViewById(R.id.textView7);
 
         //we will use this to construct a new user.
-        email.setText("Welcome " + user.getEmail() + " " + "Account Summary:");
-        name.setText("Full name: " + userInfo.getName());
-        address.setText("Address: " + userInfo.getAddress());
-        state.setText("City and State: " + userInfo.getCity() + " " + userInfo.getState());
-        point.setText("Awarded points: " + userInfo.getPoint());
+        email.setText("Account Summary:");
 
+        /*
         //each uid has children that make up user info such as email, or numPoints
         DatabaseReference upvotesRef = ref.child("point");
         //instantiate a new transaction
@@ -108,8 +105,9 @@ public class settingActivity extends Fragment  {
 
         });
 
+        */
 
-        email.setText("Welcome " + user.getEmail() + " " + "Account Summary:");
+      //  email.setText("Account Summary:");
         firebase = new Firebase("https://krazysub-aac40.firebaseio.com/");
 
         firebase.addValueEventListener(new ValueEventListener() {
