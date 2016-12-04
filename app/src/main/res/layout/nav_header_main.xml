@@ -14,20 +14,23 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:weightSum="1">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="280dp"
-        android:layout_height="0dp"
-        android:paddingTop="8dp"
-        android:src="@drawable/logot"
-        android:layout_weight="0.9"
-        android:contentDescription=""
-        tools:ignore="ContentDescription" />
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_e_mail" />
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:src="@drawable/logot"
+        android:layout_weight="0.9"
+        android:contentDescription=""
+        tools:ignore="ContentDescription"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false" />
 
 </LinearLayout>

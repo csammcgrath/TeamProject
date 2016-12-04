@@ -18,14 +18,16 @@
         app:srcCompat="@drawable/logot"
         android:id="@+id/imageView2"
         android:padding="25dp"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="29dp" />
 
     <ProgressBar
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
-        android:layout_alignBottom="@+id/imageView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="62dp" />
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
