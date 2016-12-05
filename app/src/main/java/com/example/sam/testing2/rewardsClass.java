@@ -62,6 +62,7 @@ public class rewardsClass extends Fragment {
     }
 
 
+    //this is a function
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
