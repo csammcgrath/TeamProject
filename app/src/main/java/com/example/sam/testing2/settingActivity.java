@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,11 @@ public class settingActivity extends Fragment  {
     private Button buttonLogOut;
     private TextView email;
     private TextView name;
+    private String strName;
+    private String strAddress;
+    private String strCity;
+    private String strState;
+    private int strPoint;
 
     private TextView address;
     private TextView state;
@@ -41,6 +47,7 @@ public class settingActivity extends Fragment  {
     private UserInfo userInfo;
     private DatabaseReference databaseReference;
     private Firebase firebase;
+    FirebaseUser user;
 
 
     @Nullable
@@ -63,7 +70,7 @@ public class settingActivity extends Fragment  {
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser(); //current user's ID
+        user = firebaseAuth.getCurrentUser(); //current user's ID
 
 
         // final
@@ -90,29 +97,31 @@ public class settingActivity extends Fragment  {
             @Override
             public void onDataChange(DataSnapshot data) {
 
-             //   for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    if (data.hasChildren()) {
-                        Iterator<DataSnapshot> it = data.getChildren().iterator();
+                if (data.hasChildren()) {
+                    Iterator<DataSnapshot> it = data.getChildren().iterator();
+
+                    while (it.hasNext()) {
                         DataSnapshot dataSnapshot = (DataSnapshot) it.next();
 
-                        while (it.hasNext()) {
-                            dataSnapshot = (DataSnapshot) it.next();
-                        }
-                            // userInfo = new UserInfo()
-                            String strName = dataSnapshot.getValue(UserInfo.class).getName();
-                            String strAddress = dataSnapshot.getValue(UserInfo.class).getAddress();
-                            String strCity = dataSnapshot.getValue(UserInfo.class).getCity();
-                            String strState = dataSnapshot.getValue(UserInfo.class).getState();
-                            int strPoint = dataSnapshot.getValue(UserInfo.class).getPoint();
+                        if (dataSnapshot.getValue(UserInfo.class).getEmail().equals(user.getEmail())) {
 
-                            name.setText("Full name: " + strName);
-                            address.setText("Address: " + strAddress);
-                            state.setText("City and State: " + strCity + " ," + strState);
-                            point.setText("Awarded points: " + strPoint);
+                            strName = dataSnapshot.getValue(UserInfo.class).getName();
+                            strAddress = dataSnapshot.getValue(UserInfo.class).getAddress();
+                            strCity = dataSnapshot.getValue(UserInfo.class).getCity();
+                            strState = dataSnapshot.getValue(UserInfo.class).getState();
+                            strPoint = dataSnapshot.getValue(UserInfo.class).getPoint();
 
-
+                            break;
                         }
                     }
+                }
+                // Set text on the Screen
+                name.setText("Full name: " + strName);
+                address.setText("Address: " + strAddress);
+                state.setText("City and State: " + strCity + " ," + strState);
+                point.setText("Awarded points: " + strPoint);
+            }
+
 
 
             @Override
@@ -120,7 +129,6 @@ public class settingActivity extends Fragment  {
 
             }
         });
-
 
 
     buttonLogOut.setOnClickListener(new View.OnClickListener() {

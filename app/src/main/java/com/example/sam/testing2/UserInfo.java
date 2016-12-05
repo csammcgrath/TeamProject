@@ -12,6 +12,7 @@ public class UserInfo {
     private String city;
     private String state;
     private int point;
+    private String email;
 
     public UserInfo(){
         this.address = "";
@@ -30,11 +31,12 @@ public class UserInfo {
         getCity();
 
     }
-    public UserInfo( String name, String address,String city, String state){
+    public UserInfo( String name, String address,String city, String state, String email){
         this.address = address;
         this.name = name;
         this.city = city;
         this.state = state;
+        this.email = email;
         this.point = 0;
     }
 
@@ -50,6 +52,7 @@ public class UserInfo {
     public String getState(){
         return state;
     }
+    public String getEmail() { return email; }
     public int getPoint(){
         return point;
     }
@@ -65,6 +68,9 @@ public class UserInfo {
     }
     public void setState(String state){
         this.state = state;
+    }
+    public void setEmail(String email){
+        this.email= email;
     }
     public void setPoint(int point){
         this.point = point;

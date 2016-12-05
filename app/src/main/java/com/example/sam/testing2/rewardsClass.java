@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +26,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 
+import java.util.Iterator;
+
 /**
- * Created by Sam on 11/30/2016.
+ * Created by Max on 12/05/2016.
  */
 
 public class rewardsClass extends Fragment {
@@ -42,8 +45,9 @@ public class rewardsClass extends Fragment {
     private UserInfo userInfo;
     private DatabaseReference databaseReference;
     private Firebase firebase;
+    private FirebaseUser user;
     private int progress = 0;
-    private  int userPoints;
+    private  int userPoints = 0;
 
     private synchronized int getProgressBar() {
         return this.progress;
@@ -77,7 +81,7 @@ public class rewardsClass extends Fragment {
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser(); //current user's ID
+        user = firebaseAuth.getCurrentUser(); //current user's ID
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         //the UID of the current user
@@ -104,10 +108,10 @@ public class rewardsClass extends Fragment {
                 //This is used to increment user points after a transaction
                 Integer currentValue = mutableData.getValue(Integer.class);
                 if (currentValue == null) {
-                    mutableData.setValue(1);
+                    mutableData.setValue(2);
                 } else {
-                    //increment value by 8
-                    mutableData.setValue(currentValue + 2);
+                    //increment value by 2
+                    mutableData.setValue(currentValue + 22);
                 }
                 //assume transaction worked, and return new value
                 return Transaction.success(mutableData);
@@ -124,33 +128,47 @@ public class rewardsClass extends Fragment {
         firebase = new Firebase("https://krazysub-aac40.firebaseio.com/");
         firebase.addValueEventListener(new ValueEventListener() {
 
+        Boolean found = false;
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    userInfo = new UserInfo();
-                    userPoints = data.getValue(UserInfo.class).getPoint();
+            public void onDataChange(DataSnapshot data) {
+                if (data.hasChildren()) {
+                    Iterator<DataSnapshot> it = data.getChildren().iterator();
 
+                    while (it.hasNext()) {
+                        DataSnapshot dataSnapshot = (DataSnapshot) it.next();
 
-                    leftOverPoints = 50 - userPoints;
+                        if (dataSnapshot.getValue(UserInfo.class).getEmail().equals(user.getEmail())) {
 
-                    setProgressBar(userPoints);
-
-                    mHandler.post(new Runnable() {
-                        public void run() {
-                            progressBar.setProgress(getProgressBar() * 2);
+                            userPoints = dataSnapshot.getValue(UserInfo.class).getPoint();
+                          //  Log.v("Name  :    ", dataSnapshot.getValue(UserInfo.class).getName());
+                          found = true;
                         }
-                    });
 
-                    messageText.setText("You have " + userPoints + " points! You are " + leftOverPoints + " away from a FREE sub!");
+                        if (found) {
+                           // Log.v("Name  :    ", dataSnapshot.getValue(UserInfo.class).getName());
+                            leftOverPoints = 50 - userPoints;
+                            setProgressBar(userPoints);
+                            mHandler.post(new Runnable() {
+                                public void run() {
+                                    progressBar.setProgress(getProgressBar() * 2);
+                                }
+                            });
 
-                    if (userPoints >= 50) {
-                        messageText.setVisibility(View.INVISIBLE);
-                        instructText.setVisibility(View.VISIBLE);
-                        claimButton.setVisibility(View.VISIBLE);
-                    } else {
-                        messageText.setVisibility(View.VISIBLE);
-                        instructText.setVisibility(View.INVISIBLE);
-                        claimButton.setVisibility(View.INVISIBLE);
+                            messageText.setText("You have " + userPoints + " points! You are " + leftOverPoints + " away from a FREE sub!");
+
+                            if (userPoints >= 50) {
+                                messageText.setVisibility(View.INVISIBLE);
+                                instructText.setVisibility(View.VISIBLE);
+                                claimButton.setVisibility(View.VISIBLE);
+                            } else {
+                                messageText.setVisibility(View.VISIBLE);
+                                instructText.setVisibility(View.INVISIBLE);
+                                claimButton.setVisibility(View.INVISIBLE);
+                            }
+
+                            // Quit the Loop
+                            break;
+                        }
                     }
                 }
             }

@@ -33,6 +33,7 @@ public class profileActivity extends AppCompatActivity implements android.view.V
     private EditText editTextNameSate;
     private DatabaseReference databaseReference;
     private  UserInfo userInfo;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class profileActivity extends AppCompatActivity implements android.view.V
         textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
 
 
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        user = firebaseAuth.getCurrentUser();
 
         textViewUserEmail.setText("Welcome " + user.getEmail());
         buttonSave = (Button) findViewById(R.id.safeInfo);
@@ -71,8 +72,9 @@ public class profileActivity extends AppCompatActivity implements android.view.V
         String address = editTextAddress.getText().toString().trim();
         String city = editTextCite.getText().toString().trim();
         String state = editTextNameSate.getText().toString().trim();
+        String email = user.getEmail();
 
-        userInfo = new UserInfo( name, address,city, state);
+        userInfo = new UserInfo( name, address,city, state,email);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
