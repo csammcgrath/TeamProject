@@ -1,5 +1,6 @@
 package com.example.sam.testing2;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class rewardsClass extends Fragment {
     private Handler mHandler = new Handler();
     private int leftOverPoints = 50;
     private TextView messageText;
+    private TextView rewardTitle;
     private TextView instructText;
     private Button claimButton;
     private ProgressBar progressBar;
@@ -80,9 +82,12 @@ public class rewardsClass extends Fragment {
         //the UID of the current user
         DatabaseReference ref = database.getReference(user.getUid());
 
+        rewardTitle = (TextView) getView().findViewById(R.id.textView4);
+        rewardTitle.setTextColor(Color.parseColor("#D9251C"));
         messageText = (TextView) getView().findViewById(R.id.textView11);
         claimButton = (Button) getView().findViewById(R.id.button2);
         instructText = (TextView) getView().findViewById(R.id.textView10);
+        instructText.setTextColor(Color.parseColor("#D9251C"));
         progressBar = (ProgressBar) getView().findViewById(R.id.progressBar2);
 
 
@@ -135,7 +140,7 @@ public class rewardsClass extends Fragment {
                         }
                     });
 
-                    messageText.setText("You have " + userPoints + " points! You are " + leftOverPoints + " away from the FREE sub!");
+                    messageText.setText("You have " + userPoints + " points! You are " + leftOverPoints + " away from a FREE sub!");
 
                     if (userPoints >= 50) {
                         messageText.setVisibility(View.INVISIBLE);
