@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 
+import java.util.Iterator;
+
 
 public class settingActivity extends Fragment  {
 
@@ -63,9 +65,12 @@ public class settingActivity extends Fragment  {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser(); //current user's ID
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        // final
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         //the UID of the current user
         DatabaseReference ref = database.getReference(user.getUid());
+
 
         //prompt user for information
         buttonLogOut = (Button) getView().findViewById(R.id.logOut);
@@ -78,57 +83,37 @@ public class settingActivity extends Fragment  {
         //we will use this to construct a new user.
         email.setText("Account Summary:");
 
-        /*
-        //each uid has children that make up user info such as email, or numPoints
-        DatabaseReference upvotesRef = ref.child("point");
-        //instantiate a new transaction
-        //transactions are used to change user information
-        upvotesRef.runTransaction(new Transaction.Handler() {
-            @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
-                //This is used to increment user points after a transaction
-                Integer currentValue = mutableData.getValue(Integer.class);
-                if (currentValue == null) {
-                    mutableData.setValue(1);
-                } else {
-                    //increment value by 8
-                    mutableData.setValue(currentValue + 8);
-                }
-                //assume transaction worked, and return new value
-                return Transaction.success(mutableData);
-            }
-
-            @Override
-            public void onComplete(DatabaseError databaseError, boolean b, com.google.firebase.database.DataSnapshot dataSnapshot) {
-                display();
-            }
-
-        });
-
-        */
-
-      //  email.setText("Account Summary:");
         firebase = new Firebase("https://krazysub-aac40.firebaseio.com/");
 
         firebase.addValueEventListener(new ValueEventListener() {
 
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    userInfo = new UserInfo();
+            public void onDataChange(DataSnapshot data) {
 
-                    String strName = data.getValue(UserInfo.class).getName();
-                    String strAddress = data.getValue(UserInfo.class).getAddress();
-                    String strCity = data.getValue(UserInfo.class).getCity();
-                    String strState = data.getValue(UserInfo.class).getState();
-                    int strPoint = data.getValue(UserInfo.class).getPoint();
+             //   for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    if (data.hasChildren()) {
+                        Iterator<DataSnapshot> it = data.getChildren().iterator();
+                        DataSnapshot dataSnapshot = (DataSnapshot) it.next();
 
-                    name.setText("Full name: " + strName);
-                    address.setText("Address: " + strAddress);
-                    state.setText("City and State: " + strCity + " ," + strState);
-                    point.setText("Awarded points: " + strPoint );
-                }
-            }
+                        while (it.hasNext()) {
+                            dataSnapshot = (DataSnapshot) it.next();
+                        }
+                            // userInfo = new UserInfo()
+                            String strName = dataSnapshot.getValue(UserInfo.class).getName();
+                            String strAddress = dataSnapshot.getValue(UserInfo.class).getAddress();
+                            String strCity = dataSnapshot.getValue(UserInfo.class).getCity();
+                            String strState = dataSnapshot.getValue(UserInfo.class).getState();
+                            int strPoint = dataSnapshot.getValue(UserInfo.class).getPoint();
+
+                            name.setText("Full name: " + strName);
+                            address.setText("Address: " + strAddress);
+                            state.setText("City and State: " + strCity + " ," + strState);
+                            point.setText("Awarded points: " + strPoint);
+
+
+                        }
+                    }
+
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {

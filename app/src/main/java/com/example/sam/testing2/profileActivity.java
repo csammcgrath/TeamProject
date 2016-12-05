@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.ServerValue;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -76,6 +77,9 @@ public class profileActivity extends AppCompatActivity implements android.view.V
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         databaseReference.child(user.getUid()).setValue(userInfo);
+
+        // Set in order by the ccreating time
+        databaseReference.child(user.getUid()).setPriority(ServerValue.TIMESTAMP);
 
         Toast.makeText(this, "Information saved...", Toast.LENGTH_LONG).show();
         finish();
