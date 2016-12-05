@@ -2,14 +2,17 @@ package com.example.sam.testing2;
 
 import android.support.v4.app.Fragment;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class locationsClass extends Fragment {
-
+    ImageView imageView;
 
     @Nullable
     @Override
@@ -24,5 +27,8 @@ public class locationsClass extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        imageView = (ImageView) getView().findViewById(R.id.imageView3);
+        PhotoViewAttacher photoViewer = new PhotoViewAttacher(imageView);
+        photoViewer.update();
     }
 }
