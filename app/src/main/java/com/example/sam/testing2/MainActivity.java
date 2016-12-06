@@ -150,6 +150,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_maps:
                 fragment = new MapsActivity();
                 break;
+            case R.id.nav_barcode:
+                fragment = new fragment_barcodescanner();
+                break;
         }
         //replacing the fragment if we were already in one
         if (fragment != null) {

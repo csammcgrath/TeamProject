@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.client.Firebase;
@@ -19,6 +20,8 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
+
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class homeScreen extends Fragment {
 
@@ -41,27 +44,9 @@ public class homeScreen extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //sets context to the current fragment
-        Firebase.setAndroidContext(getActivity());
-        //create new instance of userInfo class
-        userInfo = new UserInfo();
-
-        //this points to the database's URL
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser(); //current user's ID
-
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //the UID of the current user
-        DatabaseReference ref = database.getReference(user.getUid());
-
-        //connects the email variable to the respective textview (13)
-        email = (TextView) getView().findViewById(R.id.textView13);
-        //displays a welcome with the current user's ID
-        email.setText("Welcome " + user.getEmail() + "!");
-
-
-
+        //utilizing chrisbanes's library
+        ImageView imageView = (ImageView) getView().findViewById(R.id.imageView4);
+        PhotoViewAttacher photoViewer = new PhotoViewAttacher(imageView);
+        photoViewer.update();
     }
 }
