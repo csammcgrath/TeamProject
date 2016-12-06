@@ -147,6 +147,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_home:
                 fragment = new homeScreen();
                 break;
+            case R.id.nav_maps:
+                fragment = new MapsActivity();
+                break;
         }
         //replacing the fragment if we were already in one
         if (fragment != null) {

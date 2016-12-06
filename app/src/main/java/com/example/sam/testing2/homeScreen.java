@@ -20,10 +20,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
-/**
- * Created by Sam on 11/21/2016.
- */
-
 public class homeScreen extends Fragment {
 
     private FirebaseAuth firebaseAuth;
@@ -37,7 +33,6 @@ public class homeScreen extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //returning our layout file
-        //change R.layout.yourlayoutfilename for each of your fragments
         return inflater.inflate(R.layout.homescreen, container, false);
     }
 

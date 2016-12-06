@@ -28,10 +28,6 @@ import com.google.firebase.database.Transaction;
 
 import java.util.Iterator;
 
-/**
- * Created by Max on 12/05/2016.
- */
-
 public class rewardsClass extends Fragment {
 
     private Handler mHandler = new Handler();

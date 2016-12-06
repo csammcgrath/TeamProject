@@ -8,18 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-
-/**
- * Created by Sam on 11/7/2016.
- */
-
 public class menuClass1 extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //returning our layout file
-        //change R.layout.yourlayoutfilename for each of your fragments
         return inflater.inflate(R.layout.fragment_menu, container, false);
     }
 

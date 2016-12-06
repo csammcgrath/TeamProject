@@ -23,6 +23,12 @@
             android:title="Locations"
             tools:ignore="AppCompatResource" />
         <item
+            android:id="@+id/nav_maps"
+            android:icon="@drawable/ic_settings"
+            testing2:showAsAction="ifRoom"
+            android:title="Maps"
+            tools:ignore="AppCompatResource"/>
+        <item
             android:id="@+id/nav_rewards"
             android:icon="@drawable/ic_rewards"
             testing2:showAsAction="ifRoom"

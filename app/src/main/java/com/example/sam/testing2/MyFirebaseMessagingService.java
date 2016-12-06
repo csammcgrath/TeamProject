@@ -12,17 +12,16 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-/**
- * Created by Sam on 11/28/2016.
- */
-
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyFirebaseMsgService";
 
     @Override
+    //recieved the message!!!
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        //logging where the message came from -- for debugging purposes
         Log.d(TAG, "From: " + remoteMessage.getFrom());
 
+        //logging necessary information
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload:" + remoteMessage.getData());
         }
@@ -34,12 +33,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         sendNotification(remoteMessage.getNotification().getBody());
     }
 
+    //lets notify the user!
     private void sendNotification(String messageBody) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
+        //setting up the push notification stuff
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_notification)
