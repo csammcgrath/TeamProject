@@ -44,7 +44,8 @@ public class homeScreen extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //utilizing chrisbanes's library
+        //utilizing chrisbanes's library -- PhotoViewer
+        //zoom
         ImageView imageView = (ImageView) getView().findViewById(R.id.imageView4);
         PhotoViewAttacher photoViewer = new PhotoViewAttacher(imageView);
         photoViewer.update();
