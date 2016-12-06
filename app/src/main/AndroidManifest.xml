@@ -60,7 +60,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".locationsClass"
+        android:screenOrientation="portrait" />
+        <activity
+            android:name=".rewardsClass"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Pop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.CustomTheme"/>
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>

@@ -87,8 +87,8 @@ class SignIn extends AppCompatActivity implements android.view.View.OnClickListe
                         if(task.isSuccessful()){
                             // user is successfully registered
                             // we will start the main activity
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }else{
                             Toast.makeText(SignIn.this,"Your credentials could not be verified", Toast.LENGTH_SHORT).show();
                         }

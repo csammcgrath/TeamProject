@@ -1,15 +1,19 @@
 package com.example.sam.testing2;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,9 +46,10 @@ public class rewardsClass extends Fragment {
     private DatabaseReference databaseReference;
     private Firebase firebase;
     private FirebaseUser user;
+    private PopupWindow popUpWindow;
     private int progress = 0;
     private  int userPoints = 0;
-
+    private LinearLayout mainLayout;
     private synchronized int getProgressBar() {
         return this.progress;
     }
@@ -67,6 +72,8 @@ public class rewardsClass extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        popUpWindow = new PopupWindow(rewardsClass.this.getActivity());
+        mainLayout =  new LinearLayout(rewardsClass.this.getActivity());
         //sets context to the current fragment
         Firebase.setAndroidContext(getActivity());
 
@@ -104,10 +111,10 @@ public class rewardsClass extends Fragment {
                 //This is used to increment user points after a transaction
                 Integer currentValue = mutableData.getValue(Integer.class);
                 if (currentValue == null) {
-                    mutableData.setValue(2);
+                    mutableData.setValue(10);
                 } else {
                     //increment value by 2
-                    mutableData.setValue(currentValue + 22);
+                    mutableData.setValue(currentValue + 10);
                 }
                 //assume transaction worked, and return new value
                 return Transaction.success(mutableData);
@@ -115,7 +122,7 @@ public class rewardsClass extends Fragment {
 
             @Override
             public void onComplete(DatabaseError databaseError, boolean b, com.google.firebase.database.DataSnapshot dataSnapshot) {
-                display();
+               // display();
             }
 
         });
@@ -132,18 +139,20 @@ public class rewardsClass extends Fragment {
 
                     while (it.hasNext()) {
                         DataSnapshot dataSnapshot = (DataSnapshot) it.next();
-
+                        userInfo = new UserInfo();
                         if (dataSnapshot.getValue(UserInfo.class).getEmail().equals(user.getEmail())) {
 
                             userPoints = dataSnapshot.getValue(UserInfo.class).getPoint();
-                          //  Log.v("Name  :    ", dataSnapshot.getValue(UserInfo.class).getName());
+
                           found = true;
                         }
 
                         if (found) {
-                           // Log.v("Name  :    ", dataSnapshot.getValue(UserInfo.class).getName());
-                            leftOverPoints = 50 - userPoints;
-                            setProgressBar(userPoints);
+
+                            leftOverPoints = 50 - (userPoints % 50);
+
+                            int num = 50 - leftOverPoints;
+                            setProgressBar(num);
                             mHandler.post(new Runnable() {
                                 public void run() {
                                     progressBar.setProgress(getProgressBar() * 2);
@@ -152,31 +161,59 @@ public class rewardsClass extends Fragment {
 
                             messageText.setText("You have " + userPoints + " points! You are " + leftOverPoints + " away from a FREE sub!");
 
-                            if (userPoints >= 50) {
-                                messageText.setVisibility(View.INVISIBLE);
-                                instructText.setVisibility(View.VISIBLE);
-                                claimButton.setVisibility(View.VISIBLE);
-                            } else {
-                                messageText.setVisibility(View.VISIBLE);
-                                instructText.setVisibility(View.INVISIBLE);
-                                claimButton.setVisibility(View.INVISIBLE);
-                            }
+
 
                             // Quit the Loop
                             break;
                         }
                     }
                 }
+                if ((userPoints % 50) == 0) {
+                    messageText.setVisibility(View.INVISIBLE);
+                    instructText.setVisibility(View.VISIBLE);
+                    claimButton.setVisibility(View.VISIBLE);
+                } else {
+                    messageText.setVisibility(View.VISIBLE);
+                    instructText.setVisibility(View.INVISIBLE);
+                    claimButton.setVisibility(View.INVISIBLE);
+                    displayPopWindow();
+                }
             }
+
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
 
             }
         });
+
     }
     // Points were added
     public void display(){
         Toast.makeText(rewardsClass.this.getActivity(),"New Reward Points were added...", Toast.LENGTH_SHORT).show();
+    }
+
+    public void displayPopWindow(){
+        claimButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), Pop.class);
+
+                getActivity().startActivity(intent);
+                setProgressBar(0);
+                mHandler.post(new Runnable() {
+                    public void run() {
+                        progressBar.setProgress(getProgressBar() * 2);
+                    }
+                });
+                messageText.setVisibility(View.VISIBLE);
+                instructText.setVisibility(View.INVISIBLE);
+                claimButton.setVisibility(View.INVISIBLE);
+
+            }
+
+        });
     }
 }
