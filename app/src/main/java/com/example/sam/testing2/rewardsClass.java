@@ -35,7 +35,7 @@ import java.util.Iterator;
 public class rewardsClass extends Fragment {
 
     private Handler mHandler = new Handler();
-    private int leftOverPoints = 50;
+    private int leftOverPoints;
     private TextView messageText;
     private TextView rewardTitle;
     private TextView instructText;
@@ -49,7 +49,7 @@ public class rewardsClass extends Fragment {
     private FirebaseUser user;
     private PopupWindow popUpWindow;
     private int progress = 0;
-    private  int userPoints = 0;
+    private  int userPoints;
     private LinearLayout mainLayout;
     private synchronized int getProgressBar() {
         return this.progress;
@@ -80,7 +80,7 @@ public class rewardsClass extends Fragment {
 
         //create new instance of userInfo class
         userInfo = new UserInfo();
-        password = new Password();
+
         //this points to the database's URL
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -140,7 +140,6 @@ public class rewardsClass extends Fragment {
 
                     while (it.hasNext()) {
                         DataSnapshot dataSnapshot = (DataSnapshot) it.next();
-                        userInfo = new UserInfo();
 
                         if (dataSnapshot.getValue(UserInfo.class).getEmail().equals(user.getEmail())) {
 
@@ -151,8 +150,12 @@ public class rewardsClass extends Fragment {
 
                         if (found) {
 
+                            // Simple Math
                             leftOverPoints = 50 - (userPoints % 50);
                             int num = 50 - leftOverPoints;
+
+
+                            // Set to new progress of the user
                             setProgressBar(num);
                             mHandler.post(new Runnable() {
                                 public void run() {
@@ -168,15 +171,16 @@ public class rewardsClass extends Fragment {
                     }
 
                 }
+
                 if ((userPoints % 50) == 0 && userPoints != 0) {
                     messageText.setVisibility(View.INVISIBLE);
                     instructText.setVisibility(View.VISIBLE);
                     claimButton.setVisibility(View.VISIBLE);
+                    displayPopWindow();
                 } else {
                     messageText.setVisibility(View.VISIBLE);
                     instructText.setVisibility(View.INVISIBLE);
                     claimButton.setVisibility(View.INVISIBLE);
-                    displayPopWindow();
                 }
             }
 
@@ -201,8 +205,6 @@ public class rewardsClass extends Fragment {
 
                 Intent intent = new Intent(getActivity(), Pop.class);
                 getActivity().startActivity(intent);
-
-                // if the password is corrected
 
                     //each uid has children that make up user info such as email, or numPoints
                     DatabaseReference upvotesRef = ref.child("point");

@@ -33,8 +33,6 @@ public class Pop extends AppCompatActivity  implements android.view.View.OnClick
     private Firebase firebase;
     private FirebaseUser user;
 
-    public static String code = "1234";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,10 +62,8 @@ public class Pop extends AppCompatActivity  implements android.view.View.OnClick
 
     public void checkPassword(){
         String pass = editText.getText().toString().trim();
-
+        Boolean add = false;
         if(pass.equals("1234")){
-            code = pass;
-
 
             //each uid has children that make up user info such as email, or numPoints
             DatabaseReference upvotesRef = ref.child("point");
@@ -77,7 +73,16 @@ public class Pop extends AppCompatActivity  implements android.view.View.OnClick
                     //This is used to increment user points after a transaction
                     Integer currentValue = mutableData.getValue(Integer.class);
                         //increment value by 2
+                        if(currentValue != 0)
                         mutableData.setValue(currentValue - 50);
+
+                    // Debug purposes
+                    currentValue = mutableData.getValue(Integer.class);
+                    if( (currentValue % 50 ) != 0 )
+                    {
+                        int num = currentValue % 50;
+                        mutableData.setValue(currentValue - num);
+                    }
 
                     //assume transaction worked, and return new value
                     return Transaction.success(mutableData);
@@ -102,6 +107,5 @@ public class Pop extends AppCompatActivity  implements android.view.View.OnClick
             // Check if account exists
             checkPassword();
         }
-
     }
 }
