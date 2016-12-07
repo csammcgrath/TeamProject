@@ -201,17 +201,8 @@ public class rewardsClass extends Fragment {
 
                 Intent intent = new Intent(getActivity(), Pop.class);
                 getActivity().startActivity(intent);
-                String code = Pop.code;
-                Log.v("P Code P  : ", code);
 
                 // if the password is corrected
-              if(code.equals("1234")) {
-                    setProgressBar(0);
-                    mHandler.post(new Runnable() {
-                        public void run() {
-                            progressBar.setProgress(getProgressBar() * 2);
-                        }
-                    });
 
                     //each uid has children that make up user info such as email, or numPoints
                     DatabaseReference upvotesRef = ref.child("point");
@@ -221,11 +212,16 @@ public class rewardsClass extends Fragment {
                             //This is used to increment user points after a transaction
                             Integer currentValue = mutableData.getValue(Integer.class);
 
-                            if (currentValue == null) {
-                                mutableData.setValue(10);
+                            if (currentValue == userPoints) {
+                                mutableData.setValue(userPoints);
                             } else {
                                 //increment value by 2
-                                mutableData.setValue(currentValue - 50);
+                                setProgressBar(0);
+                                mHandler.post(new Runnable() {
+                                    public void run() {
+                                        progressBar.setProgress(getProgressBar() * 2);
+                                    }
+                                });
                             }
 
                             //assume transaction worked, and return new value
@@ -242,7 +238,7 @@ public class rewardsClass extends Fragment {
                     messageText.setVisibility(View.VISIBLE);
                     instructText.setVisibility(View.INVISIBLE);
                     claimButton.setVisibility(View.INVISIBLE);
-                }
+
             }
 
         });
