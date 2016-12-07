@@ -54,7 +54,6 @@ public class Pop extends AppCompatActivity  implements android.view.View.OnClick
     public void onClick(View view){
         if(view == button) {
             // Check if account exists
-            Log.v("My Password : ", "I am here");
             checkPassword();
         }
 

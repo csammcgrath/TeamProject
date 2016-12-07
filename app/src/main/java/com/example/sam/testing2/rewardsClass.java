@@ -168,7 +168,7 @@ public class rewardsClass extends Fragment {
                     }
 
                 }
-                if ((userPoints % 50) == 0) {
+                if ((userPoints % 50) == 0 && userPoints != 0) {
                     messageText.setVisibility(View.INVISIBLE);
                     instructText.setVisibility(View.VISIBLE);
                     claimButton.setVisibility(View.VISIBLE);
@@ -217,7 +217,12 @@ public class rewardsClass extends Fragment {
                         //This is used to increment user points after a transaction
                         Integer currentValue = mutableData.getValue(Integer.class);
 
+                        if (currentValue == null) {
+                            mutableData.setValue(10);
+                        } else {
+                            //increment value by 2
                             mutableData.setValue(currentValue - 50);
+                        }
 
                         //assume transaction worked, and return new value
                         return Transaction.success(mutableData);
@@ -230,9 +235,9 @@ public class rewardsClass extends Fragment {
 
                 });
 
-                messageText.setVisibility(View.INVISIBLE);
-                instructText.setVisibility(View.VISIBLE);
-                claimButton.setVisibility(View.VISIBLE);
+                messageText.setVisibility(View.VISIBLE);
+                instructText.setVisibility(View.INVISIBLE);
+                claimButton.setVisibility(View.INVISIBLE);
 
             }
 
