@@ -4,7 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    tools:background="@color/colorAccent">
+    android:background="@color/colorPrimary">
 
     <EditText
 
@@ -16,13 +16,15 @@
         android:id="@+id/editText"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:layout_below="@+id/textView16"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/common_google_signin_btn_text_light_disabled" />
 
     <TextView
         android:text="Enter 4-digit Password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:textColor="#ff0000"
+        android:layout_marginTop="33dp"
         android:id="@+id/textView16"
         android:elevation="@dimen/cast_libraries_material_featurehighlight_outer_padding"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -34,7 +36,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/verify"
+        android:elevation="7dp"
+        android:background="@color/viewfinder_border"
+        android:backgroundTint="@color/viewfinder_border"
         android:layout_below="@+id/editText"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
 
 </RelativeLayout>
