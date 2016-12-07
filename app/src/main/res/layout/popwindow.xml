@@ -6,26 +6,6 @@
     android:weightSum="1"
     tools:background="@color/colorAccent">
 
-    <TextView
-        android:text="Enter 4-digit Password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:id="@+id/textView16"
-        android:elevation="@dimen/cast_libraries_material_featurehighlight_outer_padding"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:layout_below="@+id/textView15"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text="Verify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/verify"
-        android:layout_below="@+id/editText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
-
     <EditText
 
         android:layout_height="wrap_content"
@@ -36,6 +16,25 @@
         android:id="@+id/editText"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:layout_below="@+id/textView16"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Enter 4-digit Password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:id="@+id/textView16"
+        android:elevation="@dimen/cast_libraries_material_featurehighlight_outer_padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Verify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/verify"
+        android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

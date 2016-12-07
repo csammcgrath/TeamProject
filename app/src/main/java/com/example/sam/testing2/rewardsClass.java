@@ -44,6 +44,7 @@ public class rewardsClass extends Fragment {
     private FirebaseAuth firebaseAuth;
     private UserInfo userInfo;
     private DatabaseReference databaseReference;
+    private  DatabaseReference ref;
     private Firebase firebase;
     private FirebaseUser user;
     private PopupWindow popUpWindow;
@@ -88,7 +89,7 @@ public class rewardsClass extends Fragment {
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         //the UID of the current user
-        DatabaseReference ref = database.getReference(user.getUid());
+        ref = database.getReference(user.getUid());
 
         rewardTitle = (TextView) getView().findViewById(R.id.textView4);
         rewardTitle.setTextColor(Color.parseColor("#D9251C"));
@@ -140,6 +141,7 @@ public class rewardsClass extends Fragment {
                     while (it.hasNext()) {
                         DataSnapshot dataSnapshot = (DataSnapshot) it.next();
                         userInfo = new UserInfo();
+
                         if (dataSnapshot.getValue(UserInfo.class).getEmail().equals(user.getEmail())) {
 
                             userPoints = dataSnapshot.getValue(UserInfo.class).getPoint();
@@ -150,7 +152,6 @@ public class rewardsClass extends Fragment {
                         if (found) {
 
                             leftOverPoints = 50 - (userPoints % 50);
-
                             int num = 50 - leftOverPoints;
                             setProgressBar(num);
                             mHandler.post(new Runnable() {
@@ -161,12 +162,11 @@ public class rewardsClass extends Fragment {
 
                             messageText.setText("You have " + userPoints + " points! You are " + leftOverPoints + " away from a FREE sub!");
 
-
-
                             // Quit the Loop
                             break;
                         }
                     }
+
                 }
                 if ((userPoints % 50) == 0) {
                     messageText.setVisibility(View.INVISIBLE);
@@ -208,9 +208,31 @@ public class rewardsClass extends Fragment {
                         progressBar.setProgress(getProgressBar() * 2);
                     }
                 });
-                messageText.setVisibility(View.VISIBLE);
-                instructText.setVisibility(View.INVISIBLE);
-                claimButton.setVisibility(View.INVISIBLE);
+
+                //each uid has children that make up user info such as email, or numPoints
+                DatabaseReference upvotesRef = ref.child("point");
+                upvotesRef.runTransaction(new Transaction.Handler() {
+                    @Override
+                    public Transaction.Result doTransaction(MutableData mutableData) {
+                        //This is used to increment user points after a transaction
+                        Integer currentValue = mutableData.getValue(Integer.class);
+
+                            mutableData.setValue(currentValue - 50);
+
+                        //assume transaction worked, and return new value
+                        return Transaction.success(mutableData);
+                    }
+
+                    @Override
+                    public void onComplete(DatabaseError databaseError, boolean b, com.google.firebase.database.DataSnapshot dataSnapshot) {
+                        // display();
+                    }
+
+                });
+
+                messageText.setVisibility(View.INVISIBLE);
+                instructText.setVisibility(View.VISIBLE);
+                claimButton.setVisibility(View.VISIBLE);
 
             }
 

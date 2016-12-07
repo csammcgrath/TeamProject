@@ -15,10 +15,11 @@ public class UserInfo {
     private String email;
 
     public UserInfo(){
-        this.address = "";
-        this.name = "";
-        this.city = "";
-        this.state = "";
+
+        this.address = getAddress();
+        this.name = getName();
+        this.city = getCity();
+        this.state = getState();
         this.point = 0;
     }
 

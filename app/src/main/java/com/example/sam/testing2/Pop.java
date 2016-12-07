@@ -33,7 +33,7 @@ public class Pop extends AppCompatActivity  implements android.view.View.OnClick
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width*.8),(int)(height* .6));
+        getWindow().setLayout((int) (width*.7),(int)(height* .5));
 
         button.setOnClickListener(this);
         editText.setOnClickListener(this);
