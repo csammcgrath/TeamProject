@@ -19,6 +19,8 @@ public class Pop extends AppCompatActivity  implements android.view.View.OnClick
     private Button button;
     private EditText editText;
 
+    public static String code = "1234";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +42,16 @@ public class Pop extends AppCompatActivity  implements android.view.View.OnClick
     }
 
     public void checkPassword(){
-        String password = editText.getText().toString().trim();
-        Log.v("My Password : ", password);
-        if(password.equals("1234")){
+        String pass = editText.getText().toString().trim();
+
+        if(pass.equals("1234")){
+
+            code = pass;
+            Log.v("Code :  ", code);
             Toast.makeText(this,"Congratulation!", Toast.LENGTH_SHORT).show();
         }
         else{
+            code = pass;
             Toast.makeText(this,"Password Incorrect!", Toast.LENGTH_SHORT).show();
         }
     }

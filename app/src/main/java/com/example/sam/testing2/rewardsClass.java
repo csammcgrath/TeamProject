@@ -54,7 +54,7 @@ public class rewardsClass extends Fragment {
     private synchronized int getProgressBar() {
         return this.progress;
     }
-
+    private  Password password;
     private synchronized void setProgressBar(int progress) {
         this.progress = Math.min(50, progress);
     }
@@ -80,7 +80,7 @@ public class rewardsClass extends Fragment {
 
         //create new instance of userInfo class
         userInfo = new UserInfo();
-
+        password = new Password();
         //this points to the database's URL
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -200,45 +200,49 @@ public class rewardsClass extends Fragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getActivity(), Pop.class);
-
                 getActivity().startActivity(intent);
-                setProgressBar(0);
-                mHandler.post(new Runnable() {
-                    public void run() {
-                        progressBar.setProgress(getProgressBar() * 2);
-                    }
-                });
+                String code = Pop.code;
+                Log.v("P Code P  : ", code);
 
-                //each uid has children that make up user info such as email, or numPoints
-                DatabaseReference upvotesRef = ref.child("point");
-                upvotesRef.runTransaction(new Transaction.Handler() {
-                    @Override
-                    public Transaction.Result doTransaction(MutableData mutableData) {
-                        //This is used to increment user points after a transaction
-                        Integer currentValue = mutableData.getValue(Integer.class);
+                // if the password is corrected
+              if(code.equals("1234")) {
+                    setProgressBar(0);
+                    mHandler.post(new Runnable() {
+                        public void run() {
+                            progressBar.setProgress(getProgressBar() * 2);
+                        }
+                    });
 
-                        if (currentValue == null) {
-                            mutableData.setValue(10);
-                        } else {
-                            //increment value by 2
-                            mutableData.setValue(currentValue - 50);
+                    //each uid has children that make up user info such as email, or numPoints
+                    DatabaseReference upvotesRef = ref.child("point");
+                    upvotesRef.runTransaction(new Transaction.Handler() {
+                        @Override
+                        public Transaction.Result doTransaction(MutableData mutableData) {
+                            //This is used to increment user points after a transaction
+                            Integer currentValue = mutableData.getValue(Integer.class);
+
+                            if (currentValue == null) {
+                                mutableData.setValue(10);
+                            } else {
+                                //increment value by 2
+                                mutableData.setValue(currentValue - 50);
+                            }
+
+                            //assume transaction worked, and return new value
+                            return Transaction.success(mutableData);
                         }
 
-                        //assume transaction worked, and return new value
-                        return Transaction.success(mutableData);
-                    }
+                        @Override
+                        public void onComplete(DatabaseError databaseError, boolean b, com.google.firebase.database.DataSnapshot dataSnapshot) {
+                            // display();
+                        }
 
-                    @Override
-                    public void onComplete(DatabaseError databaseError, boolean b, com.google.firebase.database.DataSnapshot dataSnapshot) {
-                        // display();
-                    }
+                    });
 
-                });
-
-                messageText.setVisibility(View.VISIBLE);
-                instructText.setVisibility(View.INVISIBLE);
-                claimButton.setVisibility(View.INVISIBLE);
-
+                    messageText.setVisibility(View.VISIBLE);
+                    instructText.setVisibility(View.INVISIBLE);
+                    claimButton.setVisibility(View.INVISIBLE);
+                }
             }
 
         });
