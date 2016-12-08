@@ -222,6 +222,9 @@ public class rewardsClass extends Fragment {
                                         progressBar.setProgress(getProgressBar() * 2);
                                     }
                                 });
+                                messageText.setVisibility(View.VISIBLE);
+                                instructText.setVisibility(View.INVISIBLE);
+                                claimButton.setVisibility(View.INVISIBLE);
                             }
 
                             //assume transaction worked, and return new value
@@ -235,9 +238,7 @@ public class rewardsClass extends Fragment {
 
                     });
 
-                    messageText.setVisibility(View.VISIBLE);
-                    instructText.setVisibility(View.INVISIBLE);
-                    claimButton.setVisibility(View.INVISIBLE);
+
 
             }
 

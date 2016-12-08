@@ -29,7 +29,7 @@ public class Pop extends AppCompatActivity  implements android.view.View.OnClick
     private EditText editText;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
-    private  DatabaseReference ref;
+    private DatabaseReference ref;
     private Firebase firebase;
     private FirebaseUser user;
 
@@ -94,7 +94,7 @@ public class Pop extends AppCompatActivity  implements android.view.View.OnClick
                 }
 
             });
-            Toast.makeText(this,"Congratulation! 50 points were subtracted.", Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(this,"Congratulation! 50 points were subtracted.", Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(this,"Password Incorrect!", Toast.LENGTH_SHORT).show();

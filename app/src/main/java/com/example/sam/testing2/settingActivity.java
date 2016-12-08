@@ -103,15 +103,18 @@ public class settingActivity extends Fragment  {
                     while (it.hasNext()) {
                         DataSnapshot dataSnapshot = (DataSnapshot) it.next();
 
-                        if (dataSnapshot.getValue(UserInfo.class).getEmail().equals(user.getEmail())) {
 
-                            strName = dataSnapshot.getValue(UserInfo.class).getName();
-                            strAddress = dataSnapshot.getValue(UserInfo.class).getAddress();
-                            strCity = dataSnapshot.getValue(UserInfo.class).getCity();
-                            strState = dataSnapshot.getValue(UserInfo.class).getState();
-                            strPoint = dataSnapshot.getValue(UserInfo.class).getPoint();
+                        if(user.getEmail() != null) {
+                            if (dataSnapshot.getValue(UserInfo.class).getEmail().equals(user.getEmail())) {
 
-                            break;
+                                strName = dataSnapshot.getValue(UserInfo.class).getName();
+                                strAddress = dataSnapshot.getValue(UserInfo.class).getAddress();
+                                strCity = dataSnapshot.getValue(UserInfo.class).getCity();
+                                strState = dataSnapshot.getValue(UserInfo.class).getState();
+                                strPoint = dataSnapshot.getValue(UserInfo.class).getPoint();
+
+                                break;
+                            }
                         }
                     }
                 }
