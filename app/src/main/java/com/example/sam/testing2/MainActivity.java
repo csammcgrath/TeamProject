@@ -1,16 +1,10 @@
 package com.example.sam.testing2;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.internal.NavigationMenu;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,16 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 import static com.example.sam.testing2.R.layout.activity_main;
-import static com.example.sam.testing2.R.layout.nav_header_main;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -148,7 +139,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new homeScreen();
                 break;
             case R.id.nav_maps:
-                fragment = new MapsActivity();
+                fragment = new maps();
                 break;
             case R.id.nav_barcode:
                 fragment = new fragment_barcodescanner();

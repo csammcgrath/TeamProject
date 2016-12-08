@@ -3,9 +3,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.google.android.gms.maps.MapView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/map1" />
+    <Button
+        android:text="Signal Butte &amp; Baseline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:width="150dp"
+        android:id="@+id/signalbutte"
+        android:layout_below="@+id/power"
+        android:layout_alignStart="@+id/power" />
+
+    <Button
+        android:text="Power &amp; Main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105dp"
+        android:width="150dp"
+        android:id="@+id/power"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Country Club &amp; Brown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="51dp"
+        android:width="150dp"
+        android:id="@+id/country"
+        android:layout_below="@+id/signalbutte"
+        android:layout_alignEnd="@+id/textView12" />
+
+    <Button
+        android:text="McDowell &amp; Greenfield"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:width="150dp"
+        android:id="@+id/greenfield"
+        android:layout_below="@+id/country"
+        android:layout_alignStart="@+id/country" />
+
+    <TextView
+        android:text="Please choose a location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:id="@+id/textView12"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
