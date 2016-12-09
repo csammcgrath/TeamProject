@@ -1,6 +1,7 @@
 package com.example.sam.testing2;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -40,6 +41,7 @@ public class settingActivity extends Fragment  {
     private String strCity;
     private String strState;
     private int strPoint;
+    private TextView settings;
 
     private TextView address;
     private TextView state;
@@ -86,6 +88,11 @@ public class settingActivity extends Fragment  {
         address = (TextView) getView().findViewById(R.id.textView5);
         state = (TextView) getView().findViewById(R.id.textView6);
         point = (TextView) getView().findViewById(R.id.textView7);
+
+        settings = (TextView) getView().findViewById(R.id.settings);
+        settings.setTextColor(Color.parseColor("#D9251C"));
+
+
 
         //we will use this to construct a new user.
         email.setText("Account Summary:");

@@ -90,11 +90,11 @@ public class rewardsClass extends Fragment {
         ref = database.getReference(user.getUid());
 
         rewardTitle = (TextView) getView().findViewById(R.id.textView4);
-     //   rewardTitle.setTextColor(Color.parseColor("#D9251C"));
+        rewardTitle.setTextColor(Color.parseColor("#D9251C"));
         messageText = (TextView) getView().findViewById(R.id.textView11);
         claimButton = (Button) getView().findViewById(R.id.button2);
         instructText = (TextView) getView().findViewById(R.id.textView10);
-     //   instructText.setTextColor(Color.parseColor("#D9251C"));
+        instructText.setTextColor(Color.parseColor("#D9251C"));
         progressBar = (ProgressBar) getView().findViewById(R.id.progressBar2);
 
 
