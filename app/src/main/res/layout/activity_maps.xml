@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -11,7 +12,8 @@
         android:width="150dp"
         android:id="@+id/signalbutte"
         android:layout_below="@+id/power"
-        android:layout_alignStart="@+id/power" />
+        android:layout_alignStart="@+id/power"
+        android:background="@color/colorPrimary"/>
 
     <Button
         android:text="Power &amp; Main"
@@ -21,17 +23,8 @@
         android:width="150dp"
         android:id="@+id/power"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text="Country Club &amp; Brown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="51dp"
-        android:width="150dp"
-        android:id="@+id/country"
-        android:layout_below="@+id/signalbutte"
-        android:layout_alignEnd="@+id/textView12" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary" />
 
     <Button
         android:text="McDowell &amp; Greenfield"
@@ -41,16 +34,46 @@
         android:width="150dp"
         android:id="@+id/greenfield"
         android:layout_below="@+id/country"
-        android:layout_alignStart="@+id/country" />
+        android:layout_alignStart="@+id/country"
+        android:background="@color/colorPrimary"/>
 
-    <TextView
-        android:text="Please choose a location"
+    <Button
+        android:text="Country Club &amp; Brown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="56dp"
+        android:width="150dp"
+        android:id="@+id/country"
+        android:layout_below="@+id/signalbutte"
+        android:layout_alignStart="@+id/signalbutte"
+        android:background="@color/colorPrimary"/>
+
+    <TextView
+        android:text="Navigate To "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/textView12"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="45dp"
+        android:textAllCaps="false"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp"
+        android:fontFamily="monospace"
+        android:typeface="monospace"
+        android:layout_above="@+id/view3"
+        android:textStyle="normal|bold" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="4dp"
+        android:background="#FFFE03"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:layout_above="@+id/signalbutte"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="55dp" />
 
 </RelativeLayout>

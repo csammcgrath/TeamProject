@@ -9,20 +9,6 @@
 
 
     <TextView
-        android:text="SETTINGS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="33dp"
-        android:id="@+id/settings"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textDirection="firstStrong"
-        android:layout_above="@+id/textView2"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:textColor="#4e759b"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,7 +61,7 @@
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_alignParentBottom="true"
         android:textColor="#3d5764"
-        android:background="#14c1d5"
+        android:background="@color/colorPrimary"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -88,5 +74,32 @@
         android:layout_marginBottom="29dp"
         android:layout_above="@+id/textView3"
         android:layout_centerHorizontal="true" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="4dp"
+        android:background="#FFFE03"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:layout_below="@+id/settings"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="21dp" />
+
+    <TextView
+        android:text="SETTINGS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/settings"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textDirection="firstStrong"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:typeface="monospace"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:textSize="45dp"
+        android:fontFamily="monospace"
+        android:textStyle="normal|bold" />
 
 </RelativeLayout>
